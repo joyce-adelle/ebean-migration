@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<migration xmlns="http://ebean-orm.github.io/xml/ns/dbmigration">
+    <changeSet type="apply">
+        <addColumn tableName="app-user">
+            <column name="deactivated_by" type="varchar"/>
+            <column name="deactivated_at" type="timestamp"/>
+        </addColumn>
+        <createTable name="otp" identityType="external" pkName="pk_otp">
+            <column name="email" type="varchar" primaryKey="true"/>
+            <column name="otp" type="varchar" notnull="true"/>
+            <column name="created_at" type="timestamp"/>
+            <column name="expired_at" type="timestamp" notnull="true"/>
+            <column name="confirmed_at" type="timestamp"/>
+        </createTable>
+        <addColumn tableName="user-profile">
+            <column name="email" type="varchar(50)" unique="uq_user-profile_email"/>
+            <column name="picture_url" type="varchar"/>
+        </addColumn>
+    </changeSet>
+    <changeSet type="pendingDrops">
+        <dropColumn columnName="is_verified" tableName="app-user"/>
+        <dropColumn columnName="picture" tableName="user-profile"/>
+    </changeSet>
+</migration>

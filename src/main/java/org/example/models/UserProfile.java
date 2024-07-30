@@ -35,7 +35,7 @@ public class UserProfile {
 
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email")
-    @Column(name = "email", length = 50, unique = true)
+    @Column(name = "email", length = 100, unique = true)
     private String email;
 
     @Column(name = "bio", columnDefinition = "TEXT")

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<migration xmlns="http://ebean-orm.github.io/xml/ns/dbmigration">
+    <changeSet type="apply">
+        <createTable name="audio" identityType="identity" pkName="pk_audio">
+            <column name="id" type="bigint" primaryKey="true"/>
+            <column name="name" type="varchar"/>
+            <column name="description" type="TEXT"/>
+            <column name="file_path" type="varchar"/>
+            <column name="file_format" type="varchar"/>
+            <column name="file_size_bytes" type="bigint"/>
+            <column name="duration" type="varchar"/>
+            <column name="bpm" type="integer"/>
+        </createTable>
+        <createTable name="category" identityType="identity" pkName="pk_category">
+            <column name="id" type="bigint" primaryKey="true"/>
+            <column name="name" type="varchar" notnull="true" unique="uq_category_name"/>
+            <column name="parent_id" type="bigint" references="category.id" foreignKeyName="fk_category_parent_id" foreignKeyIndex="ix_category_parent_id"/>
+        </createTable>
+        <createTable name="lifecycle-log" identityType="identity" pkName="pk_lifecycle-log">
+            <column name="id" type="bigint" primaryKey="true"/>
+            <column name="sheet_music_id" type="varchar" references="sheet-music.id" foreignKeyName="fk_lifecycle-log_sheet_music_id" foreignKeyIndex="ix_lifecycle-log_sheet_music_id"/>
+            <column name="event" type="varchar(8)" notnull="true" checkConstraint="check ( event in ('CREATE','UPDATE','ENABLE','APPROVE','DISPROVE','DISABLE'))" checkConstraintName="ck_lifecycle-log_event"/>
+            <column name="user_id" type="varchar" notnull="true"/>
+            <column name="details" type="TEXT"/>
+            <column name="log_time" type="timestamp" notnull="true"/>
+        </createTable>
+        <createTable name="rating" identityType="identity" pkName="pk_rating">
+            <column name="id" type="bigint" primaryKey="true"/>
+            <column name="sheet_music_id" type="varchar" references="sheet-music.id" foreignKeyName="fk_rating_sheet_music_id" foreignKeyIndex="ix_rating_sheet_music_id"/>
+            <column name="user_id" type="varchar"/>
+            <column name="rate" type="integer" notnull="true"/>
+        </createTable>
+        <createTable name="sheet-music" identityType="external" pkName="pk_sheet-music">
+            <column name="id" type="varchar" primaryKey="true"/>
+            <column name="title" type="varchar" notnull="true"/>
+            <column name="sub_title" type="varchar"/>
+            <column name="lyricist" type="varchar"/>
+            <column name="composer" type="varchar"/>
+            <column name="arranger" type="varchar"/>
+            <column name="tempo" type="integer" notnull="true"/>
+            <column name="time_signature" type="varchar"/>
+            <column name="description" type="TEXT"/>
+            <column name="file_path" type="varchar"/>
+            <column name="page_count" type="integer"/>
+            <column name="cover_image_path" type="varchar"/>
+            <column name="average_rating" type="double(8,2)" notnull="true"/>
+            <column name="rating_count" type="bigint" notnull="true"/>
+            <column name="uploaded_by_id" type="varchar" notnull="true"/>
+            <column name="approved" type="boolean default false not null"/>
+            <column name="enabled" type="boolean default false not null"/>
+            <column name="extracted_text" type="TEXT"/>
+        </createTable>
+        <createTable name="sheet_music_key_signatures" pkName="pk_sheet_music_key_signatures">
+            <column name="sheet_music_id" type="varchar" notnull="true" references="sheet-music.id" foreignKeyName="fk_sheet_music_key_signatures_sheet_music_id" foreignKeyIndex="ix_sheet_music_key_signatures_sheet_music_id"/>
+            <column name="key_signature" type="varchar(255)" notnull="true" checkConstraint="check ( key_signature in ('C_MAJOR','G_MAJOR','D_MAJOR','A_MAJOR','E_MAJOR','B_MAJOR','F_SHARP_MAJOR','C_SHARP_MAJOR','A_FLAT_MAJOR','E_FLAT_MAJOR','B_FLAT_MAJOR','F_MAJOR','C_MINOR','G_MINOR','D_MINOR','A_MINOR','E_MINOR','B_MINOR','F_SHARP_MINOR','C_SHARP_MINOR','A_FLAT_MINOR','E_FLAT_MINOR','B_FLAT_MINOR','F_MINOR'))" checkConstraintName="ck_sheet_music_key_signatures_key_signature"/>
+        </createTable>
+        <createTable name="sheet_music_categories" pkName="pk_sheet_music_categories">
+            <column name="sheet_music_id" type="varchar" notnull="true" primaryKey="true"/>
+            <column name="category_id" type="bigint" notnull="true" primaryKey="true"/>
+            <foreignKey name="fk_sheet_music_categories_sheet-music" columnNames="sheet_music_id" refColumnNames="id" refTableName="sheet-music" indexName="ix_sheet_music_categories_sheet-music"/>
+            <foreignKey name="fk_sheet_music_categories_category" columnNames="category_id" refColumnNames="id" refTableName="category" indexName="ix_sheet_music_categories_category"/>
+        </createTable>
+        <createTable name="sheet_music_audios" pkName="pk_sheet_music_audios">
+            <column name="sheet_music_id" type="varchar" notnull="true" primaryKey="true"/>
+            <column name="audio_id" type="bigint" notnull="true" primaryKey="true"/>
+            <foreignKey name="fk_sheet_music_audios_sheet-music" columnNames="sheet_music_id" refColumnNames="id" refTableName="sheet-music" indexName="ix_sheet_music_audios_sheet-music"/>
+            <foreignKey name="fk_sheet_music_audios_audio" columnNames="audio_id" refColumnNames="id" refTableName="audio" indexName="ix_sheet_music_audios_audio"/>
+        </createTable>
+    </changeSet>
+</migration>

@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="643caebf-7e7b-4cae-8900-86f8e81d04f0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Audio.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/models/LifecycleLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Rating.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/models/SheetMusic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/util/SheetMusicLifecycleLogActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ebean-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ebean-plugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/UserProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/util/AuthProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/util/AuthProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/util/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/util/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dbmigration/V1.0.1__create_otp_and_modify_user.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dbmigration/V_001__initial.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dbmigration/model/V1.0.1__create_otp_and_modify_user.model.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dbmigration/model/V_001__initial.model.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/main/MainDbMigration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/main/MainDbMigration.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

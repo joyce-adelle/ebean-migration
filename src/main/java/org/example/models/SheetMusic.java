@@ -86,6 +86,11 @@ public class SheetMusic {
     @Column(name = "view_count")
     private Long viewCount;
 
+    @ElementCollection
+    @CollectionTable(name = "sheet_music_languages", joinColumns = @JoinColumn(name = "sheet_music_id"))
+    @Column(name = "languages")
+    private Set<@NotNull String> languages = new HashSet<>();
+
     @ManyToMany
     @JoinTable(
             name = "sheet_music_categories",

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<migration xmlns="http://ebean-orm.github.io/xml/ns/dbmigration">
+    <changeSet type="apply">
+        <createTable name="sheet_music_languages" pkName="pk_sheet_music_languages">
+            <column name="sheet_music_id" type="varchar" notnull="true" references="sheet-music.id" foreignKeyName="fk_sheet_music_languages_sheet_music_id" foreignKeyIndex="ix_sheet_music_languages_sheet_music_id"/>
+            <column name="languages" type="varchar(255)" notnull="true"/>
+        </createTable>
+    </changeSet>
+</migration>

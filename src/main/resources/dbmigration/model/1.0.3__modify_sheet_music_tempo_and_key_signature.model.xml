@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<migration xmlns="http://ebean-orm.github.io/xml/ns/dbmigration">
+    <changeSet type="apply">
+        <alterColumn columnName="tempo" tableName="sheet-music" type="varchar(11)" currentType="integer" notnull="false" currentNotnull="true" checkConstraint="check ( tempo in ('GRAVE','LENTO','LARGO','LARGHETTO','ADAGIO','ADAGIETTO','ANDANTE','ANDANTINO','MODERATO','ALLEGRETTO','ALLEGRO','VIVACE','VIVO','PRESTO','PRESTISSIMO','RUBATO'))" checkConstraintName="ck_sheet-music_tempo"/>
+        <addColumn tableName="sheet-music">
+            <column name="time_signature_numerator" type="integer"/>
+            <column name="time_signature_denominator" type="integer"/>
+        </addColumn>
+    </changeSet>
+    <changeSet type="pendingDrops">
+        <dropColumn columnName="time_signature" tableName="sheet-music"/>
+    </changeSet>
+</migration>

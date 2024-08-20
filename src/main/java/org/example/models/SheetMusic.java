@@ -1,10 +1,13 @@
 package org.example.models;
 
+import io.ebean.annotation.DbDefault;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import org.example.util.KeySignature;
+import org.example.util.Tempo;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,16 +30,18 @@ public class SheetMusic {
 
     private String arranger;
 
-    private int tempo;
+    @Enumerated(EnumType.STRING)
+    private Tempo tempo;
 
-    @ElementCollection(targetClass = KeySignature.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "sheet_music_key_signatures", joinColumns = @JoinColumn(name = "sheet_music_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "key_signature")
-    private Set<KeySignature> keySignatures;
+    private KeySignature keySignature;
 
-    @Column(name = "time_signature")
-    private String timeSignature;
+    @Column(name = "time_signature_numerator")
+    private Integer timeSignatureNumerator;
+
+    @Column(name = "time_signature_denominator")
+    private Integer timeSignatureDenominator;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -51,7 +56,7 @@ public class SheetMusic {
     private String coverImagePath;
 
     @NotNull
-    @Column(name = "average_rating", precision=8, scale=2)
+    @Column(name = "average_rating", precision = 8, scale = 2)
     private Double averageRating;
 
     @NotNull
@@ -71,6 +76,15 @@ public class SheetMusic {
 
     @Column(name = "extracted_text", columnDefinition = "TEXT")
     private String extractedText;
+
+    @Column(name = "last_viewed_at")
+    private Instant lastViewedAt;
+
+    @NotNull
+    @Min(0)
+    @DbDefault("0")
+    @Column(name = "view_count")
+    private Long viewCount;
 
     @ManyToMany
     @JoinTable(

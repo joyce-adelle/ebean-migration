@@ -38,6 +38,7 @@
             <column name="composer" type="varchar"/>
             <column name="arranger" type="varchar"/>
             <column name="tempo" type="integer" notnull="true"/>
+            <column name="key_signature" type="varchar(13)" checkConstraint="check ( key_signature in ('C_MAJOR','G_MAJOR','D_MAJOR','A_MAJOR','E_MAJOR','B_MAJOR','F_SHARP_MAJOR','C_SHARP_MAJOR','A_FLAT_MAJOR','E_FLAT_MAJOR','B_FLAT_MAJOR','F_MAJOR','C_MINOR','G_MINOR','D_MINOR','A_MINOR','E_MINOR','B_MINOR','F_SHARP_MINOR','C_SHARP_MINOR','A_FLAT_MINOR','E_FLAT_MINOR','B_FLAT_MINOR','F_MINOR'))" checkConstraintName="ck_sheet-music_key_signature"/>
             <column name="time_signature" type="varchar"/>
             <column name="description" type="TEXT"/>
             <column name="file_path" type="varchar"/>
@@ -49,10 +50,6 @@
             <column name="approved" type="boolean default false not null"/>
             <column name="enabled" type="boolean default false not null"/>
             <column name="extracted_text" type="TEXT"/>
-        </createTable>
-        <createTable name="sheet_music_key_signatures" pkName="pk_sheet_music_key_signatures">
-            <column name="sheet_music_id" type="varchar" notnull="true" references="sheet-music.id" foreignKeyName="fk_sheet_music_key_signatures_sheet_music_id" foreignKeyIndex="ix_sheet_music_key_signatures_sheet_music_id"/>
-            <column name="key_signature" type="varchar(255)" notnull="true" checkConstraint="check ( key_signature in ('C_MAJOR','G_MAJOR','D_MAJOR','A_MAJOR','E_MAJOR','B_MAJOR','F_SHARP_MAJOR','C_SHARP_MAJOR','A_FLAT_MAJOR','E_FLAT_MAJOR','B_FLAT_MAJOR','F_MAJOR','C_MINOR','G_MINOR','D_MINOR','A_MINOR','E_MINOR','B_MINOR','F_SHARP_MINOR','C_SHARP_MINOR','A_FLAT_MINOR','E_FLAT_MINOR','B_FLAT_MINOR','F_MINOR'))" checkConstraintName="ck_sheet_music_key_signatures_key_signature"/>
         </createTable>
         <createTable name="sheet_music_categories" pkName="pk_sheet_music_categories">
             <column name="sheet_music_id" type="varchar" notnull="true" primaryKey="true"/>

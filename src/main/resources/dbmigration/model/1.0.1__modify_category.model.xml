@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<migration xmlns="http://ebean-orm.github.io/xml/ns/dbmigration">
+    <changeSet type="apply">
+        <addColumn tableName="category">
+            <column name="has_children" type="boolean" defaultValue="false" notnull="true"/>
+            <column name="has_parents" type="boolean" defaultValue="false" notnull="true"/>
+        </addColumn>
+        <createTable name="category_relationship" pkName="pk_category_relationship">
+            <column name="parent_id" type="bigint" notnull="true" primaryKey="true"/>
+            <column name="child_id" type="bigint" notnull="true" primaryKey="true"/>
+            <foreignKey name="fk_category_relationship_category_1" columnNames="parent_id" refColumnNames="id" refTableName="category" indexName="ix_category_relationship_category_1"/>
+            <foreignKey name="fk_category_relationship_category_2" columnNames="child_id" refColumnNames="id" refTableName="category" indexName="ix_category_relationship_category_2"/>
+        </createTable>
+    </changeSet>
+    <changeSet type="pendingDrops">
+        <dropColumn columnName="parent_id" tableName="category"/>
+    </changeSet>
+</migration>
